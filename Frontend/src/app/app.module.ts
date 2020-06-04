@@ -15,9 +15,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCardModule } from "@angular/material/card";
 import { MatDialogModule } from "@angular/material/dialog";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatSnackBarModule } from "@angular/material/snack-bar"
-import { HttpClientModule } from "@angular/common/http";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { MenuComponent } from "./components/menu/menu.component";
 import { ListVehicleComponent } from "./pages/list-vehicle/list-vehicle.component";
@@ -25,10 +25,14 @@ import { CreateVehicleComponent } from "./pages/create-vehicle/create-vehicle.co
 import { UpdateVehicleComponent } from "./pages/update-vehicle/update-vehicle.component";
 import { DetailVehicleComponent } from "./pages/detail-vehicle/detail-vehicle.component";
 import { ConfirmDialogComponent } from "./components/confirm-dialog/confirm-dialog.component";
-import { SnackbarComponent } from './components/snackbar/snackbar.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SnackbarComponent } from "./components/snackbar/snackbar.component";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatMenuModule } from "@angular/material/menu";
+import { LoginComponent } from "./pages/login/login.component";
+import { JwtInterceptor } from 'src/helpers/jwt.interceptor';
+import { ErrorInterceptor } from 'src/helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MenuComponent,
     ConfirmDialogComponent,
     SnackbarComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatCardModule,
     MatIconModule,
     MatListModule,
-    MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatSelectModule,
     MatSidenavModule,
     MatTableModule,
@@ -67,10 +72,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatMenuModule,
   ],
-  providers: [SnackbarComponent],
+  providers: [
+    SnackbarComponent,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmDialogComponent]
+  entryComponents: [ConfirmDialogComponent],
 })
 export class AppModule {}

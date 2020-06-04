@@ -1,26 +1,65 @@
-<div>
-  <h3>Editar Produto</h3>
-</div>
+<mat-card>
+  <mat-card-title>Editar Veículo </mat-card-title>
+  <mat-card-content>
+    <br />
+    <br />
+    <form
+      class="example-container"
+      [formGroup]="vehicleForm"
+      (ngSubmit)="updateVehicle(vehicleForm.value)"
+    >
+      <mat-form-field>
+        <input
+          matInput
+          name="placa"
+          placeholder="Placa"
+          formControlName="placa"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="chassi"
+          placeholder="Chassi"
+          formControlName="chassi"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="renavam"
+          placeholder="Renavam"
+          formControlName="renavam"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="marca"
+          placeholder="Marca"
+          formControlName="marca"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput
+          name="modelo"
+          placeholder="Modelo"
+          formControlName="modelo"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="ano" placeholder="Ano" formControlName="ano" />
+      </mat-form-field>
 
-<form class="example-container" [formGroup]="vehicleForm" (ngSubmit)="updateVehicle(vehicleForm.value)">
-  <mat-form-field>
-    <input matInput name="placa" placeholder="Placa" formControlName="placa">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput name="chassi" placeholder="Chassi" formControlName="chassi">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput name="renavam" placeholder="Renavam" formControlName="renavam">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput name="marca" placeholder="Marca" formControlName="marca">
-  </mat-form-field>
-  <mat-form-field>
-    <textarea  matInput name="modelo" placeholder="Modelo" formControlName="modelo"></textarea>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput name="ano" placeholder="Ano" formControlName="ano">
-  </mat-form-field>
-
-  <button type="submit" [disabled]="!vehicleForm.valid" mat-button color="primary" > Editar </button>
-</form>
+      <button
+        type="submit"
+        [disabled]="!vehicleForm.valid"
+        mat-button
+        color="primary"
+      >
+        Editar
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
